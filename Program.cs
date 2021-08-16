@@ -1,6 +1,5 @@
 ﻿using System;
 using Humanizer;
-using System;
 using System.Diagnostics;
 
 
@@ -16,7 +15,8 @@ namespace DotNetDependencies
             Console.WriteLine("\nDate/Time Manipulation:");
             HumanizeDates();
 
-            Console.WriteLine("Fibonacci!");
+
+            Console.WriteLine("Fibonacci with Dotnet Debugging!");
             int result = DoSomeFibonacci(5);
             Console.WriteLine(result);
             
@@ -25,6 +25,8 @@ namespace DotNetDependencies
 
         static int DoSomeFibonacci(int n)
         {
+            Debug.WriteLine($"Entering {nameof(DoSomeFibonacci)} method");
+            Debug.WriteLine($"We are looking for the {n}th number");
             int n1 = 0;
             int n2 = 1;
             int sum = 0;
@@ -34,7 +36,11 @@ namespace DotNetDependencies
                 sum = n1 + n2;
                 n1 = n2;
                 n2 = sum;
+                Debug.WriteLineIf(sum == 1, $"sum is 1, n1 is {n1}, n2 is {n2}");
             }
+            // If n2 is 5 continue, else break.
+            Debug.Assert(n2 == 5, "The return value is not 5 and it should be.");
+           
             return n == 0 ? n1 : n2;
         }
 
